@@ -7,9 +7,11 @@ namespace WebQLDaoTao.Models
 {
     public class KetQua
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string MaSV { get; set; }
         public string MaMH { get; set; }
         public float? Diem { get; set; }
+
+        public string HoTenSV { get; set; }
     }
 }

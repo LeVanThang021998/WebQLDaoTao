@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NhapDiem.aspx.cs" Inherits="WebQLDaoTao.NhapDiem" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="NhapDiem.aspx.cs" Inherits="WebQLDaoTao.NhapDiem" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
@@ -14,7 +13,7 @@
         AutoGenerateColumns="False" DataSourceID="odsKetQua" Width="70%" DataKeyNames="id" ShowFooter="true">
         <Columns>
             <asp:BoundField DataField="MaSV" HeaderText="Mã SV" SortExpression="MaSV" ReadOnly="true"></asp:BoundField>
-            <asp:BoundField DataField="hotensv" HeaderText="Họ tên SV" ></asp:BoundField>
+            <asp:BoundField DataField="HoTenSV" HeaderText="Họ tên SV" ></asp:BoundField>
             <asp:TemplateField HeaderText="Điểm">
                 <ItemTemplate>
                     <asp:TextBox ID="txtDiem" runat="server" Text='<%# Eval("Diem") %>' CssClass="form-control" Width="150px"></asp:TextBox>

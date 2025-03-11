@@ -14,7 +14,7 @@ namespace WebQLDaoTao.Models
         {
             List<MonHoc> ds = new List<MonHoc>();
 
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["QLDaoTao_ConStr"].ConnectionString);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString);
             conn.Open();
             SqlCommand cmd = new SqlCommand("select * from monhoc", conn);
             SqlDataReader dr = cmd.ExecuteReader();

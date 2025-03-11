@@ -24,9 +24,10 @@ namespace WebQLDaoTao.Models
             {
                 KetQua kq = new KetQua()
                 {
-                    id = int.Parse(rd["id"].ToString()),
+                    Id = int.Parse(rd["id"].ToString()),
                     MaSV = rd["masv"].ToString(),
-                    MaMH = rd["MaMH"].ToString()
+                    MaMH = rd["MaMH"].ToString(),
+                    HoTenSV  = rd["hotensv"].ToString() + " " + rd["tensv"].ToString()
                 };
 
                 if (!string.IsNullOrEmpty(rd["diem"].ToString()))
@@ -43,22 +44,36 @@ namespace WebQLDaoTao.Models
             throw new NotImplementedException();
         }
 
-        public DataTable getByMaMH(string mamh)
+        public List<KetQua> getByMaMH(string mamh)
         {
-            DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString))
+            List<KetQua> ds = new List<KetQua>();
+
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("select ketqua.*, hosv, tensv from " +
+                "ketqua inner join sinhvien on ketqua.masv = sinhvien.masv where mamh=@mamh", conn);
+
+            cmd.Parameters.AddWithValue("@mamh", mamh);
+            SqlDataReader rd = cmd.ExecuteReader();
+            while (rd.Read())
             {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM ketqua WHERE mamh = @mamh", conn))
+                KetQua kq = new KetQua()
                 {
-                    cmd.Parameters.AddWithValue("@mamh", mamh);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        dt.Load(reader);
-                    }
+                    Id = int.Parse(rd["id"].ToString()),
+                    MaSV = rd["MaSV"].ToString(),
+                    MaMH = rd["mamh"].ToString(),
+                    HoTenSV = rd["hosv"].ToString() + " " + rd["tensv"].ToString()
+
+                };
+                if (!string.IsNullOrEmpty(rd["diem"].ToString()))
+                {
+                    kq.Diem = float.Parse(rd["diem"].ToString());
                 }
+
+                ds.Add(kq);
             }
-            return dt;
+
+            return ds;
         }
 
         internal void Delete(int id)

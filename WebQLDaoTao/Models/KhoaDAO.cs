@@ -15,7 +15,7 @@ namespace WebQLDaoTao.Models
         {
             List<Khoa> ds = new List<Khoa>();
 
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["QLDaoTao_ConStr"].ConnectionString);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString);
             conn.Open();
             SqlCommand cmd = new SqlCommand("select * from Khoa", conn);
             SqlDataReader dr = cmd.ExecuteReader();
